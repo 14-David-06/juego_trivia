@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+    <img src="https://funguaicaramo.org/wp-content/uploads/2025/04/FG-Diseno_pagina.2025.04.13.png" 
+        alt="Logo Fundación Guaicaramo" class="logo">
+    <h1 class="title">🌴 TRIVIA FUNDACIÓN GUAICARAMO 🌴</h1>
+    <p class="subtitle">Conocimiento sobre Palma Africana y Sostenibilidad</p>
+    </div>
+
+    <div class="score-section">
+    <div class="score" id="score-display">🏆 Puntuación: 0</div>
+    <button class="reset-btn" onclick="reiniciarJuego()">🔄 Reiniciar</button>
+    </div>
+
+    <div class="wheel-container">
+    <div class="wheel-pointer"></div>
+    <div class="wheel" id="wheel">
+        <div class="wheel-center">🌴</div>
+    </div>
+    </div>
+
+    <button class="spin-btn" id="spin-btn" onclick="girarRuleta()">
+    🎯 ¡GIRAR RULETA!
+    </button>
+
+    <div class="instructions">
+    <h3>🎮 ¿Cómo jugar?</h3>
+    <p>Gira la ruleta para obtener una categoría y responde correctamente para ganar <strong>10 puntos</strong></p>
+    <p><strong>Categorías:</strong> Fundación Guaicaramo • Palma Africana • Sostenibilidad • Historia • Producción</p>
+    </div>
+
+    <!-- Modal de Pregunta -->
+    <div class="question-modal" id="question-modal">
+    <div class="question-content">
+        <img src="https://funguaicaramo.org/wp-content/uploads/2025/04/FG-Diseno_pagina.2025.04.13.png" 
+            alt="Logo" class="question-logo">
+        <div class="category-title" id="category-title"></div>
+        <div class="question-text" id="question-text"></div>
+        <div class="options-container" id="options-container"></div>
+        <div class="result-message" id="result-message" style="display: none;"></div>
+        <button class="close-btn" id="close-btn" onclick="cerrarPregunta()" style="display: none;">
+        Continuar
+        </button>
+    </div>
+    </div>
+    
+    <script src="logic.js"></script>
+</body>
+</html>
+
