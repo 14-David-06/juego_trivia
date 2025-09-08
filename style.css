@@ -11,8 +11,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 1.5vw;
   color: white;
+  overflow-x: hidden;
 }
 
 .header {
@@ -21,62 +22,81 @@ body {
 }
 
 .logo {
-  width: 180px;
-  height: 120px;
-  margin: 10px;
+  width: 12vw;
+  height: 8vw;
+  margin: 0.8vw;
   border-radius: 15px;
   object-fit: contain;
   display: inline-block;
 }
 
 .logo-fundacion {
-  width: 180px;
-  height: 120px;
+  width: 12vw;
+  height: 8vw;
 }
 
 .logo-dao {
-  width: 180px;
-  height: 120px;
+  width: 12vw;
+  height: 8vw;
 }
 
 .logo-guaicaramo {
-  width: 180px;
-  height: 120px;
+  width: 12vw;
+  height: 8vw;
 }
 
 .logo-sirius {
-  width: 180px;
-  height: 120px;
+  width: 12vw;
+  height: 8vw;
 }
 
 .title {
-  font-size: 3.5em;
+  font-size: 4vw;
   font-weight: bold;
   text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
   color: #e8f5e8;
 }
 
 .subtitle {
-  font-size: 1.5em;
+  font-size: 2vw;
   color: #c6f6d5;
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
 }
 
 .score-section {
   display: flex;
-  gap: 20px;
+  gap: 2vw;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 3vh;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90vw;
+  max-width: 1200px;
+}
+
+.stats {
+  display: flex;
+  gap: 1.5vw;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+.stat-item {
+  background: rgba(255,255,255,0.1);
+  padding: 1vh 1.5vw;
+  border-radius: 25px;
+  font-size: 1.8vw;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
 .score {
   background: rgba(255,255,255,0.15);
-  padding: 12px 25px;
+  padding: 1.5vh 2.5vw;
   border-radius: 30px;
-  font-size: 18px;
+  font-size: 2vw;
   font-weight: bold;
   backdrop-filter: blur(10px);
 }
@@ -84,11 +104,11 @@ body {
 .reset-btn {
   background: #c53030;
   border: none;
-  padding: 12px 25px;
+  padding: 1.5vh 2.5vw;
   border-radius: 30px;
   color: white;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.8vw;
   font-weight: bold;
   transition: all 0.3s;
 }
@@ -100,9 +120,13 @@ body {
 
 .wheel-container {
   position: relative;
-  margin: 30px auto;
-  width: 420px;
-  height: 420px;
+  margin: 3vh auto;
+  width: 28vw;
+  height: 28vw;
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 300px;
+  min-height: 300px;
 }
 
 .wheel {
@@ -110,10 +134,26 @@ body {
   height: 100%;
   border-radius: 50%;
   background: conic-gradient(
-    #38a169 0deg 90deg,
-    #2f855a 90deg 180deg,
-    #276749 180deg 270deg,
-    #1a365d 270deg 360deg
+    #D1BA30 0deg 18deg,    /* Fundación */
+    #2D753E 18deg 36deg,   /* DAO */
+    #00A3FF 36deg 54deg,   /* Sirius */
+    #D97523 54deg 72deg,   /* Guaicaramo */
+    #D1BA30 72deg 90deg,   /* Fundación */
+    #2D753E 90deg 108deg,  /* DAO */
+    #00A3FF 108deg 126deg, /* Sirius */
+    #D97523 126deg 144deg, /* Guaicaramo */
+    #D1BA30 144deg 162deg, /* Fundación */
+    #2D753E 162deg 180deg, /* DAO */
+    #00A3FF 180deg 198deg, /* Sirius */
+    #D97523 198deg 216deg, /* Guaicaramo */
+    #D1BA30 216deg 234deg, /* Fundación */
+    #2D753E 234deg 252deg, /* DAO */
+    #00A3FF 252deg 270deg, /* Sirius */
+    #D97523 270deg 288deg, /* Guaicaramo */
+    #D1BA30 288deg 306deg, /* Fundación */
+    #2D753E 306deg 324deg, /* DAO */
+    #00A3FF 324deg 342deg, /* Sirius */
+    #D97523 342deg 360deg  /* Guaicaramo */
   );
   position: relative;
   transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -126,18 +166,59 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+  width: 5vw;
+  height: 5vw;
+  max-width: 100px;
+  max-height: 100px;
+  min-width: 60px;
+  min-height: 60px;
   background: linear-gradient(45deg, #f7fafc, #edf2f7);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 2.5vw;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   z-index: 10;
   color: #2d5016;
   font-weight: bold;
+}
+
+/* Posicionamiento correcto de los logos en la ruleta */
+.wheel-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.5vw;
+  height: 2vw;
+  max-width: 40px;
+  max-height: 32px;
+  min-width: 20px;
+  min-height: 16px;
+  object-fit: contain;
+  z-index: 5;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Fundación (amarillo #D1BA30) - 0-90° - centro en 45° */
+.fundacion-logo {
+  transform: rotate(45deg) translate(10vw) rotate(-45deg);
+}
+
+/* DAO (verde #2D753E) - 90-180° - centro en 135° */
+.dao-logo {
+  transform: rotate(135deg) translate(10vw) rotate(-135deg);
+}
+
+/* Sirius (azul #00A3FF) - 180-270° - centro en 225° */
+.sirius-logo {
+  transform: rotate(225deg) translate(10vw) rotate(-225deg);
+}
+
+/* Guaicaramo (naranja #D97523) - 270-360° - centro en 315° */
+.guaicaramo-logo {
+  transform: rotate(315deg) translate(10vw) rotate(-315deg);
 }
 
 .wheel-pointer {
@@ -157,14 +238,14 @@ body {
 .spin-btn {
   background: linear-gradient(45deg, #38a169, #48bb78);
   border: none;
-  padding: 22px 45px;
+  padding: 2vh 4vw;
   border-radius: 50px;
   color: white;
-  font-size: 20px;
+  font-size: 2.2vw;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
-  margin: 30px 0;
+  margin: 3vh 0;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   text-transform: uppercase;
 }
@@ -182,23 +263,23 @@ body {
 
 .instructions {
   background: rgba(255,255,255,0.1);
-  padding: 25px;
+  padding: 2.5vh 3vw;
   border-radius: 20px;
-  margin: 25px 0;
+  margin: 2.5vh 0;
   backdrop-filter: blur(10px);
   text-align: center;
   border: 1px solid rgba(255,255,255,0.2);
-  max-width: 600px;
+  max-width: 80vw;
 }
 
 .instructions h3 {
   margin-bottom: 15px;
   color: #c6f6d5;
-  font-size: 1.8em;
+  font-size: 2.5vw;
 }
 
 .instructions p {
-  font-size: 1.3em;
+  font-size: 1.8vw;
   line-height: 1.6;
 }
 
@@ -352,37 +433,191 @@ body {
   transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
+/* Responsive Design */
+
+/* Para pantallas muy grandes (TV/monitores grandes) */
+@media (min-width: 1920px) and (orientation: portrait) {
+  .title { font-size: 5vw; }
+  .subtitle { font-size: 2.5vw; }
+  .instructions h3 { font-size: 3vw; }
+  .instructions p { font-size: 2.2vw; }
+  .spin-btn { font-size: 2.5vw; }
+  .wheel-container {
+    width: 35vw;
+    height: 35vw;
+  }
+  .fundacion-logo { transform: rotate(45deg) translate(12vw) rotate(-45deg); }
+  .dao-logo { transform: rotate(135deg) translate(12vw) rotate(-135deg); }
+  .sirius-logo { transform: rotate(225deg) translate(12vw) rotate(-225deg); }
+  .guaicaramo-logo { transform: rotate(315deg) translate(12vw) rotate(-315deg); }
+}
+
+/* Para pantallas de laptop/desktop */
+@media (max-width: 1600px) and (min-width: 1200px) {
+  .title { font-size: 4.5vw; }
+  .subtitle { font-size: 2.2vw; }
+  .wheel-container {
+    width: 32vw;
+    height: 32vw;
+  }
+  .logo {
+    width: 14vw;
+    height: 9vw;
+  }
+  .fundacion-logo { transform: rotate(45deg) translate(11vw) rotate(-45deg); }
+  .dao-logo { transform: rotate(135deg) translate(11vw) rotate(-135deg); }
+  .sirius-logo { transform: rotate(225deg) translate(11vw) rotate(-225deg); }
+  .guaicaramo-logo { transform: rotate(315deg) translate(11vw) rotate(-315deg); }
+}
+
+/* Para tablets en orientación vertical */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .title { font-size: 6vw; }
+  .subtitle { font-size: 3vw; }
+  .wheel-container {
+    width: 40vw;
+    height: 40vw;
+  }
+  .logo {
+    width: 18vw;
+    height: 12vw;
+  }
+  .stats {
+    flex-direction: column;
+    gap: 1vh;
+  }
+  .stat-item { font-size: 2.5vw; }
+  .fundacion-logo { transform: rotate(45deg) translate(15vw) rotate(-45deg); }
+  .dao-logo { transform: rotate(135deg) translate(15vw) rotate(-135deg); }
+  .sirius-logo { transform: rotate(225deg) translate(15vw) rotate(-225deg); }
+  .guaicaramo-logo { transform: rotate(315deg) translate(15vw) rotate(-315deg); }
+}
+
+/* Para móviles */
+@media (max-width: 767px) {
+  body {
+    padding: 3vw;
+  }
+  
   .title {
-    font-size: 2.2em;
+    font-size: 8vw;
+    margin-bottom: 2vh;
+  }
+  
+  .subtitle {
+    font-size: 4vw;
+    margin-bottom: 3vh;
   }
   
   .logo {
-    width: 120px;
-    height: 80px;
-    margin: 5px;
+    width: 25vw;
+    height: 17vw;
+    margin: 1vw;
   }
   
   .wheel-container {
-    width: 360px;
-    height: 360px;
+    width: 70vw;
+    height: 70vw;
+    margin: 4vh auto;
   }
   
   .wheel-center {
-    width: 70px;
-    height: 70px;
-    font-size: 28px;
+    width: 12vw;
+    height: 12vw;
+    font-size: 6vw;
+  }
+  
+  .wheel-logo {
+    width: 6vw;
+    height: 4.5vw;
+  }
+  
+  /* Posicionamiento de 20 logos para móvil */
+  .wheel-logo:nth-child(1) { transform: rotate(9deg) translate(25vw) rotate(-9deg); }
+  .wheel-logo:nth-child(2) { transform: rotate(27deg) translate(25vw) rotate(-27deg); }
+  .wheel-logo:nth-child(3) { transform: rotate(45deg) translate(25vw) rotate(-45deg); }
+  .wheel-logo:nth-child(4) { transform: rotate(63deg) translate(25vw) rotate(-63deg); }
+  .wheel-logo:nth-child(5) { transform: rotate(81deg) translate(25vw) rotate(-81deg); }
+  .wheel-logo:nth-child(6) { transform: rotate(99deg) translate(25vw) rotate(-99deg); }
+  .wheel-logo:nth-child(7) { transform: rotate(117deg) translate(25vw) rotate(-117deg); }
+  .wheel-logo:nth-child(8) { transform: rotate(135deg) translate(25vw) rotate(-135deg); }
+  .wheel-logo:nth-child(9) { transform: rotate(153deg) translate(25vw) rotate(-153deg); }
+  .wheel-logo:nth-child(10) { transform: rotate(171deg) translate(25vw) rotate(-171deg); }
+  .wheel-logo:nth-child(11) { transform: rotate(189deg) translate(25vw) rotate(-189deg); }
+  .wheel-logo:nth-child(12) { transform: rotate(207deg) translate(25vw) rotate(-207deg); }
+  .wheel-logo:nth-child(13) { transform: rotate(225deg) translate(25vw) rotate(-225deg); }
+  .wheel-logo:nth-child(14) { transform: rotate(243deg) translate(25vw) rotate(-243deg); }
+  .wheel-logo:nth-child(15) { transform: rotate(261deg) translate(25vw) rotate(-261deg); }
+  .wheel-logo:nth-child(16) { transform: rotate(279deg) translate(25vw) rotate(-279deg); }
+  .wheel-logo:nth-child(17) { transform: rotate(297deg) translate(25vw) rotate(-297deg); }
+  .wheel-logo:nth-child(18) { transform: rotate(315deg) translate(25vw) rotate(-315deg); }
+  .wheel-logo:nth-child(19) { transform: rotate(333deg) translate(25vw) rotate(-333deg); }
+  .wheel-logo:nth-child(20) { transform: rotate(351deg) translate(25vw) rotate(-351deg); }
+  
+  .score-section {
+    flex-direction: column;
+    gap: 2vh;
+    margin-bottom: 4vh;
+  }
+  
+  .stats {
+    flex-direction: column;
+    gap: 1vh;
+    width: 100%;
+  }
+  
+  .stat-item {
+    font-size: 4vw;
+    padding: 1.5vh 3vw;
+  }
+  
+  .score {
+    font-size: 4vw;
+    padding: 2vh 4vw;
+  }
+  
+  .reset-btn {
+    font-size: 3.5vw;
+    padding: 2vh 6vw;
+  }
+  
+  .spin-btn {
+    font-size: 4vw;
+    padding: 3vh 8vw;
+    margin: 4vh 0;
+  }
+  
+  .instructions {
+    padding: 3vh 4vw;
+    max-width: 92vw;
+  }
+  
+  .instructions h3 {
+    font-size: 5vw;
+    margin-bottom: 2vh;
+  }
+  
+  .instructions p {
+    font-size: 3.5vw;
   }
   
   .options-container {
     grid-template-columns: 1fr;
+    gap: 2vh;
   }
   
   .question-content {
-    padding: 25px;
+    padding: 4vw;
+    width: 95vw;
   }
   
-  .instructions {
-    padding: 20px;
+  .question-text {
+    font-size: 4vw;
+    margin-bottom: 4vh;
+  }
+  
+  .option-btn {
+    padding: 3vh 4vw;
+    font-size: 3.5vw;
   }
 }
