@@ -115,9 +115,9 @@ const preguntasDatabase = {
 
 // Categorías para la ruleta
 const categorias = [
-  { nombre: 'fundacion', titulo: 'FUNDACIÓN' },
+  { nombre: 'fundacion', titulo: 'FUNDACIÓN GUAICARAMO' },
   { nombre: 'palma', titulo: 'DEL LLANO ALTO OLEICO – DAO' },
-  { nombre: 'sostenibilidad', titulo: 'SIRIUS REGENERATIVE' },
+  { nombre: 'sostenibilidad', titulo: 'SIRIUS REGENERATIVE SOLUTIONS' },
   { nombre: 'historia', titulo: 'GUAICARAMO' }
 ];
 
@@ -126,6 +126,12 @@ let puntuacion = 0;
 let preguntaActual = null;
 let categoriaActual = null;
 let girando = false;
+let preguntasUsadas = {
+  fundacion: [],
+  palma: [],
+  sostenibilidad: [],
+  historia: []
+};
 
 // Función para girar la ruleta
 function girarRuleta() {
@@ -173,9 +179,52 @@ function mostrarPregunta(categoria) {
     return;
   }
   
-  // Seleccionar pregunta aleatoria
-  const indiceAleatorio = Math.floor(Math.random() * preguntas.length);
-  preguntaActual = preguntas[indiceAleatorio];
+  // Filtrar preguntas no utilizadas
+  const preguntasDisponibles = preguntas.filter((_, index) => 
+    !preguntasUsadas[categoria.nombre].includes(index)
+  );
+  
+  if (preguntasDisponibles.length === 0) {
+    alert('Ya has respondido todas las preguntas de esta categoría. ¡Felicitaciones!');
+    return;
+  }
+  
+  // Seleccionar pregunta aleatoria de las disponibles
+  const indiceAleatorio = Math.floor(Math.random() * preguntasDisponibles.length);
+  const preguntaSeleccionada = preguntasDisponibles[indiceAleatorio];
+  const indiceOriginal = preguntas.indexOf(preguntaSeleccionada);
+  
+  preguntaActual = preguntaSeleccionada;
+  
+  // Marcar pregunta como usada
+  preguntasUsadas[categoria.nombre].push(indiceOriginal);
+  
+  // Actualizar logo según la categoría
+  const logoElement = document.querySelector('.question-logo');
+  let logoSrc = '';
+  let logoAlt = '';
+  
+  switch(categoria.nombre) {
+    case 'fundacion':
+      logoSrc = '/media/Logo-Fundacion.png';
+      logoAlt = 'Logo Fundación Guaicaramo';
+      break;
+    case 'palma':
+      logoSrc = '/media/Logo-DAO.png';
+      logoAlt = 'Logo DAO';
+      break;
+    case 'sostenibilidad':
+      logoSrc = '/media/Logo-Sirius.png';
+      logoAlt = 'Logo Sirius Regenerative';
+      break;
+    case 'historia':
+      logoSrc = '/media/logo-Guaicaramo.png';
+      logoAlt = 'Logo Guaicaramo';
+      break;
+  }
+  
+  logoElement.src = logoSrc;
+  logoElement.alt = logoAlt;
   
   // Llenar modal
   document.getElementById('category-title').textContent = categoria.titulo;
@@ -255,6 +304,14 @@ function reiniciarJuego() {
   puntuacion = 0;
   actualizarPuntuacion();
   cerrarPregunta();
+  
+  // Resetear preguntas usadas
+  preguntasUsadas = {
+    fundacion: [],
+    palma: [],
+    sostenibilidad: [],
+    historia: []
+  };
   
   // Resetear ruleta
   document.getElementById('wheel').style.transform = 'rotate(0deg)';
