@@ -28,6 +28,12 @@ body {
   border-radius: 15px;
   object-fit: contain;
   display: inline-block;
+  filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .logo-fundacion {
@@ -619,5 +625,171 @@ body {
   .option-btn {
     padding: 3vh 4vw;
     font-size: 3.5vw;
+  }
+}
+
+/* Modales Personalizados */
+.custom-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.custom-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  padding: 3vw;
+  max-width: 90vw;
+  width: 500px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9);
+  animation: modalSlideIn 0.3s ease forwards;
+  border: 3px solid rgba(45, 117, 22, 0.2);
+}
+
+.modal-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));
+}
+
+.modal-content h3 {
+  color: #2d5016;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+}
+
+.modal-content p {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+}
+
+.confirm-btn:hover {
+  background: linear-gradient(135deg, #218838 0%, #17a2b8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.cancel-btn {
+  background: linear-gradient(135deg, #6c757d 0%, #868e96 100%);
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(135deg, #5a6268 0%, #727b84 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.result-stats {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 2px solid rgba(45, 117, 22, 0.1);
+}
+
+.result-stats p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.result-stats .score {
+  color: #28a745;
+  font-size: 1.5rem;
+}
+
+.result-stats .percentage {
+  color: #2d5016;
+  font-size: 1.3rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: scale(0.7) translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive para modales */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95vw;
+    padding: 6vw;
+  }
+  
+  .modal-icon {
+    font-size: 3rem;
+  }
+  
+  .modal-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-content p {
+    font-size: 1rem;
+  }
+  
+  .modal-btn {
+    padding: 1rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+  
+  .modal-buttons {
+    flex-direction: column;
+    align-items: center;
   }
 }

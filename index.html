@@ -49,6 +49,7 @@
     
     <div class="instructions">
     <p>Este juego fue desarrollado con mucho ❤️ por los niños del grupo de sistemas de la Fundación Guaicaramo.</p>
+    </div>
 
     <!-- Modal de Pregunta -->
     <div class="question-modal" id="question-modal">
@@ -62,6 +63,30 @@
         <button class="close-btn" id="close-btn" onclick="cerrarPregunta()" style="display: none;">
         Continuar
         </button>
+    </div>
+    </div>
+
+    <!-- Modal de Alerta Personalizado -->
+    <div class="custom-modal" id="alert-modal">
+    <div class="modal-content">
+        <div class="modal-icon" id="alert-icon">🎮</div>
+        <h3 id="alert-title">Título</h3>
+        <p id="alert-message">Mensaje</p>
+        <div class="modal-buttons">
+        <button class="modal-btn confirm-btn" onclick="cerrarModalAlerta()">Entendido</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal de Resultado Final -->
+    <div class="custom-modal" id="result-modal">
+    <div class="modal-content">
+        <div class="modal-icon" id="result-icon">🏆</div>
+        <h3 id="result-title">¡Juego Terminado!</h3>
+        <div class="result-stats" id="result-stats"></div>
+        <div class="modal-buttons">
+        <button class="modal-btn confirm-btn" onclick="cerrarResultadoFinal()">🔄 Jugar de Nuevo</button>
+        </div>
     </div>
     </div>
     

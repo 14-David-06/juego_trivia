@@ -35,27 +35,86 @@ let tirosRestantes = 5;
 let respuestasCorrectas = 0;
 let respuestasIncorrectas = 0;
 let preguntasUsadas = [];
+let juegoTerminado = false;
+let preguntasDisponibles = [...todasLasPreguntas];
+let rotacionAcumulada = 0;
+
+// Función para mostrar modal personalizado
+function mostrarModalPersonalizado(icono, titulo, mensaje) {
+  document.getElementById('alert-icon').textContent = icono;
+  document.getElementById('alert-title').textContent = titulo;
+  document.getElementById('alert-message').textContent = mensaje;
+  document.getElementById('alert-modal').classList.add('show');
+}
+
+// Función para mostrar modal con auto-cierre
+function mostrarModalConAutoCierre(icono, titulo, mensaje, tiempo = 2000) {
+  document.getElementById('alert-icon').textContent = icono;
+  document.getElementById('alert-title').textContent = titulo;
+  document.getElementById('alert-message').textContent = mensaje;
+  document.getElementById('alert-modal').classList.add('show');
+  
+  // Auto-cerrar después del tiempo especificado
+  setTimeout(() => {
+    cerrarModalAlerta();
+  }, tiempo);
+}
+
+// Función para cerrar modal de alerta
+function cerrarModalAlerta() {
+  document.getElementById('alert-modal').classList.remove('show');
+}
 
 // Función para iniciar el juego
 function iniciarJuego() {
   juegoIniciado = true;
+  juegoTerminado = false;
   tirosRestantes = 5;
   respuestasCorrectas = 0;
   respuestasIncorrectas = 0;
   puntuacion = 0;
+  rotacionAcumulada = 0;
   
-  // Resetear preguntas usadas
+  // Resetear preguntas usadas y disponibles
   preguntasUsadas = [];
+  preguntasDisponibles = [...todasLasPreguntas];
   
-  // Cambiar botones
+  // Cambiar botones INMEDIATAMENTE
   document.getElementById('spin-btn').style.display = 'none';
   document.getElementById('girar-btn').style.display = 'block';
   
   // Actualizar contadores
   actualizarContadores();
   actualizarPuntuacion();
+  actualizarRuleta();
   
-  alert('🎮 ¡Juego iniciado! Tienes 5 giros de ruleta. ¡Buena suerte!');
+  // Resetear posición de la ruleta
+  const wheel = document.getElementById('wheel');
+  wheel.style.transform = 'rotate(0deg)';
+  
+  console.log('🎮 Juego iniciado correctamente');
+}
+
+// Función para actualizar la ruleta dinámicamente
+function actualizarRuleta() {
+  const wheel = document.getElementById('wheel');
+  
+  // Calcular ángulo por sección
+  const numSecciones = preguntasDisponibles.length;
+  const anguloPorSeccion = 360 / numSecciones;
+  
+  // Generar gradiente cónico dinámico
+  let gradientStops = [];
+  let currentAngle = 0;
+  
+  preguntasDisponibles.forEach((pregunta, index) => {
+    const nextAngle = currentAngle + anguloPorSeccion;
+    gradientStops.push(`${pregunta.color} ${currentAngle}deg ${nextAngle}deg`);
+    currentAngle = nextAngle;
+  });
+  
+  const conicGradient = `conic-gradient(${gradientStops.join(', ')})`;
+  wheel.style.background = conicGradient;
 }
 
 // Función para actualizar contadores
@@ -67,7 +126,7 @@ function actualizarContadores() {
 
 // Función para girar la ruleta
 function girarRuleta() {
-  if (girando || !juegoIniciado || tirosRestantes <= 0) return;
+  if (girando || !juegoIniciado || tirosRestantes <= 0 || juegoTerminado || preguntasDisponibles.length === 0) return;
   
   girando = true;
   const girarBtn = document.getElementById('girar-btn');
@@ -77,49 +136,46 @@ function girarRuleta() {
   girarBtn.disabled = true;
   girarBtn.textContent = '🌪 GIRANDO...';
   
-  // Calcular rotación aleatoria
-  const vueltas = Math.floor(Math.random() * 4) + 5; // 5-8 vueltas
+  // Calcular rotación fuerte y consistente para cada giro
+  const vueltas = Math.floor(Math.random() * 3) + 6; // 6-8 vueltas (más vueltas)
   const anguloExtra = Math.floor(Math.random() * 360);
-  const rotacionTotal = (vueltas * 360) + anguloExtra;
+  const nuevaRotacion = (vueltas * 360) + anguloExtra;
   
-  // Aplicar rotación
-  wheel.style.transform = `rotate(${rotacionTotal}deg)`;
+  // Sumar a la rotación acumulada para evitar giros hacia atrás
+  rotacionAcumulada += nuevaRotacion;
   
-  // Calcular pregunta ganadora - NUEVA LÓGICA PARA 20 SECCIONES
-  const anguloNormalizado = (360 - (anguloExtra % 360)) % 360; // Invertir porque la ruleta gira en sentido contrario
-  const segmento = Math.floor(anguloNormalizado / 18); // 360/20 = 18 grados por segmento
-  const preguntaGanadora = todasLasPreguntas[segmento];
+  // Aplicar la rotación acumulada total
+  wheel.style.transform = `rotate(${rotacionAcumulada}deg)`;
   
-  // Esperar que termine la animación
+  // Calcular pregunta ganadora basada solo en el ángulo extra (no en la rotación total)
+  const numSecciones = preguntasDisponibles.length;
+  const anguloPorSeccion = 360 / numSecciones;
+  const anguloNormalizado = (360 - (anguloExtra % 360)) % 360;
+  const segmento = Math.floor(anguloNormalizado / anguloPorSeccion);
+  const preguntaGanadora = preguntasDisponibles[segmento];
+  
+  // Esperar que termine la animación (mismo tiempo para consistencia)
   setTimeout(() => {
     girando = false;
     tirosRestantes--;
     actualizarContadores();
     
-    if (tirosRestantes > 0) {
+    if (tirosRestantes > 0 && preguntasDisponibles.length > 1) {
       girarBtn.disabled = false;
       girarBtn.textContent = '🎯 ¡GIRAR RULETA!';
     } else {
+      juegoTerminado = true;
       girarBtn.disabled = true;
       girarBtn.textContent = '🏁 JUEGO TERMINADO';
-      setTimeout(() => {
-        mostrarResultadoFinal();
-      }, 1000);
     }
     
     // Mostrar pregunta
     mostrarPregunta(preguntaGanadora);
-  }, 4000);
+  }, 4000); // Tiempo consistente de 4 segundos
 }
 
 // Función para mostrar pregunta
 function mostrarPregunta(preguntaSeleccionada) {
-  // Verificar si la pregunta ya fue usada
-  if (preguntasUsadas.includes(preguntaSeleccionada.id)) {
-    alert('Esta pregunta ya fue respondida. ¡Inténtalo de nuevo!');
-    return;
-  }
-  
   preguntaActual = preguntaSeleccionada;
   
   // Marcar pregunta como usada
@@ -203,8 +259,23 @@ function verificarRespuesta(indiceSeleccionado) {
 // Función para cerrar pregunta
 function cerrarPregunta() {
   document.getElementById('question-modal').classList.remove('show');
+  
+  // Eliminar la pregunta respondida de las disponibles
+  preguntasDisponibles = preguntasDisponibles.filter(p => p.id !== preguntaActual.id);
+  
+  // Actualizar ruleta después de responder (solo colores, sin logos)
+  if (preguntasDisponibles.length > 0) {
+    actualizarRuleta();
+  }
+  
   preguntaActual = null;
-  categoriaActual = null;
+  
+  // Si el juego terminó, mostrar resultado final
+  if (juegoTerminado || preguntasDisponibles.length === 0) {
+    setTimeout(() => {
+      mostrarResultadoFinal();
+    }, 500);
+  }
 }
 
 // Función para actualizar puntuación
@@ -215,36 +286,60 @@ function actualizarPuntuacion() {
 // Función para mostrar resultado final
 function mostrarResultadoFinal() {
   const porcentaje = Math.round((respuestasCorrectas / 5) * 100);
-  let mensaje = '';
   let emoji = '';
+  let titulo = '';
   
   if (respuestasCorrectas >= 4) {
     emoji = '🏆';
-    mensaje = `¡EXCELENTE! ${respuestasCorrectas}/5 correctas (${porcentaje}%)`;
+    titulo = '¡EXCELENTE!';
   } else if (respuestasCorrectas >= 3) {
     emoji = '🎉';
-    mensaje = `¡MUY BIEN! ${respuestasCorrectas}/5 correctas (${porcentaje}%)`;
+    titulo = '¡MUY BIEN!';
   } else {
     emoji = '💪';
-    mensaje = `¡SIGUE INTENTANDO! ${respuestasCorrectas}/5 correctas (${porcentaje}%)`;
+    titulo = '¡SIGUE INTENTANDO!';
   }
   
-  alert(`${emoji} JUEGO TERMINADO\n\n${mensaje}\n\nPuntuación final: ${puntuacion} puntos`);
+  // Actualizar modal de resultado
+  document.getElementById('result-icon').textContent = emoji;
+  document.getElementById('result-title').textContent = titulo;
+  
+  const statsHTML = `
+    <p><strong>Respuestas Correctas:</strong> ${respuestasCorrectas}/5</p>
+    <p><strong>Respuestas Incorrectas:</strong> ${respuestasIncorrectas}/5</p>
+    <p class="percentage"><strong>Porcentaje de Acierto:</strong> ${porcentaje}%</p>
+    <p class="score"><strong>Puntuación Final:</strong> ${puntuacion} puntos</p>
+  `;
+  
+  document.getElementById('result-stats').innerHTML = statsHTML;
+  document.getElementById('result-modal').classList.add('show');
 }
 
-// Función para reiniciar juego
-function reiniciarJuego() {
+// Función para cerrar resultado final y reiniciar automáticamente
+function cerrarResultadoFinal() {
+  document.getElementById('result-modal').classList.remove('show');
+  
+  // Reiniciar automáticamente el juego
+  setTimeout(() => {
+    ejecutarReinicioAutomatico();
+  }, 500);
+}
+
+// Función para ejecutar reinicio automático después del juego
+function ejecutarReinicioAutomatico() {
   puntuacion = 0;
   juegoIniciado = false;
+  juegoTerminado = false;
   tirosRestantes = 5;
   respuestasCorrectas = 0;
   respuestasIncorrectas = 0;
+  rotacionAcumulada = 0;
   actualizarPuntuacion();
   actualizarContadores();
-  cerrarPregunta();
   
-  // Resetear preguntas usadas
+  // Resetear preguntas usadas y disponibles
   preguntasUsadas = [];
+  preguntasDisponibles = [...todasLasPreguntas];
   
   // Resetear botones
   document.getElementById('spin-btn').style.display = 'block';
@@ -252,16 +347,26 @@ function reiniciarJuego() {
   document.getElementById('girar-btn').disabled = false;
   document.getElementById('girar-btn').textContent = '🎯 ¡GIRAR RULETA!';
   
-  // Resetear ruleta
+  // Resetear ruleta a posición inicial
   document.getElementById('wheel').style.transform = 'rotate(0deg)';
+  actualizarRuleta();
   
-  alert('🔄 ¡Juego reiniciado! Haz clic en "INICIAR JUEGO" para comenzar.');
+  console.log('🔄 Juego reiniciado automáticamente después de finalizar');
+}
+
+// Función para reiniciar juego (ahora recarga la página)
+function reiniciarJuego() {
+  // Mostrar confirmación antes de recargar
+  if (confirm('¿Estás seguro de que quieres reiniciar? Se recargará la página y se perderá todo el progreso.')) {
+    location.reload();
+  }
 }
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
   actualizarPuntuacion();
   actualizarContadores();
+  actualizarRuleta();
   console.log('🌴 Trivia Fundación Guaicaramo iniciada');
-  console.log('📚 Categorías disponibles:', categorias.map(c => c.titulo));
+  console.log('📚 Preguntas disponibles:', todasLasPreguntas.length);
 });
