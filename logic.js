@@ -102,7 +102,7 @@ const preguntasDatabase = {
     },
     {
       pregunta: "¿Qué tipo de proyecto sostenible implementado en Guaicaramo ayuda a mejorar la calidad de las aguas residuales?",
-      opciones: ["Recicla   je", "Humedales artificiales", "Siembra de árboles", "Compostaje"],
+      opciones: ["Reciclaje", "Humedales artificiales", "Siembra de árboles", "Compostaje"],
       respuestaCorrecta: 1
     },
     {
