@@ -66,6 +66,19 @@
     </div>
     </div>
 
+    <!-- Modal de Confirmación para Reiniciar -->
+    <div class="custom-modal" id="confirm-restart-modal">
+    <div class="modal-content">
+        <div class="modal-icon">🔄</div>
+        <h3>¿Reiniciar Juego?</h3>
+        <p>¿Estás seguro de que quieres reiniciar el juego? Se perderá todo el progreso actual.</p>
+        <div class="modal-buttons">
+        <button class="modal-btn confirm-btn" onclick="confirmarReinicio()">Sí, Reiniciar</button>
+        <button class="modal-btn cancel-btn" onclick="cerrarModalReinicio()">Cancelar</button>
+        </div>
+    </div>
+    </div>
+
     <!-- Modal de Alerta Personalizado -->
     <div class="custom-modal" id="alert-modal">
     <div class="modal-content">
@@ -85,7 +98,7 @@
         <h3 id="result-title">¡Juego Terminado!</h3>
         <div class="result-stats" id="result-stats"></div>
         <div class="modal-buttons">
-        <button class="modal-btn confirm-btn" onclick="cerrarResultadoFinal()">🔄 Jugar de Nuevo</button>
+        <button class="modal-btn confirm-btn" onclick="cerrarResultadoFinal()">Continuar</button>
         </div>
     </div>
     </div>
