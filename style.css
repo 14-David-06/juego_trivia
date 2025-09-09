@@ -242,7 +242,7 @@ body {
 }
 
 .spin-btn {
-  background: linear-gradient(45deg, #38a169, #48bb78);
+  background: linear-gradient(45deg, #4f979c, #4f979c);
   border: none;
   padding: 2vh 4vw;
   border-radius: 50px;
@@ -259,7 +259,7 @@ body {
 .spin-btn:hover:not(:disabled) {
   transform: scale(1.08);
   box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-  background: linear-gradient(45deg, #2f855a, #38a169);
+  background: linear-gradient(45deg, #305b94, #305b94);
 }
 
 .spin-btn:disabled {
