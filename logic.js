@@ -40,7 +40,7 @@ const datosCuriosos = {
     "📈 Crecimiento sostenido: Comunican aceptación continua del mercado año tras año.",
     "🌍 Agricultura consciente: Reconocen a la 'madre tierra' como base de su narrativa.",
     "⚙️ Innovación tecnológica: Mejoras en planta para eficiencia logística y de procesos.",
-    "🌐 Navegación global: Sitio web bilingüe en español e inglés."
+    "🌐 Nuestro sitio web es bilingüe, permitiendo una navegación global."
   ],
   'guaicaramo': [
     "⚡ Energía limpia: Generan energía renovable con biogás de aguas residuales.",
