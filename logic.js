@@ -26,6 +26,38 @@ const todasLasPreguntas = [
   { id: 19, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "En el tratamiento de aguas residuales, logramos obtener un recurso energético. ¿Cuál es?", opciones: ["Carbón", "Gasolina", "Diésel", "Biogás"], respuestaCorrecta: 3 }
 ];
 
+// Base de datos de datos curiosos por empresa
+const datosCuriosos = {
+  'fundacion': [
+    "🌱 Origen social: Nació en 2014 como vehículo independiente de inversión social del grupo.",
+    "🏘️ Impacto real: En 2022 benefició a más de 1.000 familias en Barranca de Upía y Villanueva.",
+    "👵 Identidad pedagógica: 'Doña Pepa' es el personaje que acompaña el bienestar de la comunidad.",
+    "🌍 Estrategia sostenible: Foco en Desarrollo Territorial Sostenible en su zona de influencia.",
+    "🤝 Brazo social: Se presenta como la extensión del grupo para transformar las dinámicas regionales."
+  ],
+  'dao': [
+    "💯 Visión clara: Su promesa es 'nunca perder tu confianza'.",
+    "📈 Crecimiento sostenido: Comunican aceptación continua del mercado año tras año.",
+    "🌍 Agricultura consciente: Reconocen a la 'madre tierra' como base de su narrativa.",
+    "⚙️ Innovación tecnológica: Mejoras en planta para eficiencia logística y de procesos.",
+    "🌐 Navegación global: Sitio web bilingüe en español e inglés."
+  ],
+  'guaicaramo': [
+    "⚡ Energía limpia: Generan energía renovable con biogás de aguas residuales.",
+    "🦋 Biodiversidad activa: Mantienen Áreas de Alto Valor de Conservación (AVC) y concursos de avistamiento.",
+    "📸 Fauna protegida: Cámaras trampa han registrado más de 30 especies, incluido el ocelote.",
+    "🔄 Diversificación: Negocios en aceites, cítricos, ganadería y biocombustibles.",
+    "🏅 Certificaciones verdes: RSPO, ISCC y Cero Deforestación avalan su gestión ambiental."
+  ],
+  'sirius': [
+    "🔬 Evolución tecnológica: Rediseño de planta de pirólisis en 2024 (Rafaela 2.0).",
+    "🎯 Portafolio innovador: Biochar Blend, Star Dust y Sirius Bacter.",
+    "🎯 Meta 2030: Regenerar 100.000 ha; ya reportan 8.750 ha y 2.450 t de CO₂ capturadas.",
+    "🤖 Triple enfoque: Integran pirólisis + biotecnología + IA (Agentics, Piroliapp y Alma).",
+    "📍 Raíz local: Operan desde Barranca de Upía con datos de contacto claros en su web."
+  ]
+};
+
 // Variables globales
 let puntuacion = 0;
 let preguntaActual = null;
@@ -394,22 +426,47 @@ function verificarRespuesta(indiceSeleccionado) {
     }
   });
   
+  // Obtener dato curioso correspondiente a esta pregunta
+  const datosCuriosEmpresa = datosCuriosos[preguntaActual.empresa];
+  const indicePregunta = todasLasPreguntas.filter(p => p.empresa === preguntaActual.empresa).findIndex(p => p.id === preguntaActual.id);
+  const datoCurioso = datosCuriosEmpresa[indicePregunta % datosCuriosEmpresa.length];
+  
   // Mostrar resultado
+  let mensajeCompleto = '';
   if (esCorrecta) {
     puntuacion += 10;
     respuestasCorrectas++;
-    resultMessage.textContent = '🎉 ¡Correcto! +10 puntos';
+    mensajeCompleto = `
+      <div style="margin-bottom: 15px;">
+        🎉 <strong>¡Correcto!</strong> +10 puntos
+      </div>
+      <div style="padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px; border-left: 4px solid #22543d;">
+        <strong>💡 Dato curioso:</strong><br>
+        ${datoCurioso}
+      </div>
+    `;
     resultMessage.className = 'result-message result-correct';
     actualizarPuntuacion();
     actualizarContadores();
   } else {
     respuestasIncorrectas++;
     const respuestaCorrecta = preguntaActual.opciones[preguntaActual.respuestaCorrecta];
-    resultMessage.textContent = `❌ Incorrecto. La respuesta correcta era: ${respuestaCorrecta}`;
+    mensajeCompleto = `
+      <div style="margin-bottom: 15px;">
+        ❌ <strong>Incorrecto.</strong> La respuesta correcta era:<br>
+        <strong>${respuestaCorrecta}</strong>
+      </div>
+      <div style="padding: 10px; background: rgba(255,255,255,0.2); border-radius: 8px; border-left: 4px solid #822727;">
+        <strong>💡 Dato curioso:</strong><br>
+        ${datoCurioso}
+      </div>
+    `;
     resultMessage.className = 'result-message result-incorrect';
     actualizarContadores();
   }
   
+  // Insertar el HTML formateado
+  resultMessage.innerHTML = mensajeCompleto;
   resultMessage.style.display = 'block';
   closeBtn.style.display = 'inline-block';
 }
