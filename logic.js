@@ -1,75 +1,77 @@
-// Base de datos de preguntas reorganizada para 20 secciones individuales
-const todasLasPreguntas = [
-  // FUNDACIÓN - 5 preguntas (amarillo #D1BA30)
-  { id: 0, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Hace cuantos años se fundó la Fundación Guaicaramo?", opciones: ["12 AÑOS", "15 AÑOS", "8 AÑOS"], respuestaCorrecta: 0 },
-  { id: 1, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Hace cuantos años se fundó Del Llano Alto Oleico - DAO?", opciones: ["12 AÑOS", "10 AÑOS", "8 AÑOS"], respuestaCorrecta: 1 },
-  { id: 2, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿Cuál es la principal biomasa que utiliza Sirius Regenerative para producir biochar?", opciones: ["Cascarilla de palma africana", "Cáscara de arroz", "Bagazo de caña"], respuestaCorrecta: 0 },
-  { id: 3, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "Durante los últimos 4 años, Doña Pepa ha tenido un propósito principal. ¿Cuál ha sido?", opciones: ["La productividad", "El buen trato", "La disciplina", "El orden y aseo"], respuestaCorrecta: 1 },
-  { id: 4, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Cuántas personas se han visto beneficiadas en las zonas de influencia?", opciones: ["+ 5.000 beneficiados", "+ 10.000 beneficiados", "No ha habido beneficiados"], respuestaCorrecta: 1 },
-  
-  { id: 5, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Qué tipo de Aceite de fruto de Palma comercializamos?", opciones: ["Aceite de fruto de palma convencional", "Aceite de fruto de Palma Alto Oleico", "Aceite de Aguacate"], respuestaCorrecta: 1 },
-  { id: 6, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿Cuál de los siguientes productos hace parte del portafolio de Sirius Regenerative?", opciones: ["Biochar Blend", "Sirius Bacter (biológico)", "Todas las anteriores"], respuestaCorrecta: 2 },
-  { id: 7, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "Generamos alianzas con empresas del sector para proteger y conservar al:", opciones: ["Oso palmero", "Chigüiro", "Venado", "Jaguar"], respuestaCorrecta: 0 },
-  { id: 8, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Cuántos son los municipios impactados por la labor realizada por la fundación Guaicaramo?", opciones: ["32 Municipios", "4 Municipios", "12 Municipios"], respuestaCorrecta: 1 },
-  { id: 9, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Dónde están ubicadas nuestras plantaciones aliadas?", opciones: ["Mani – Casanare", "Bogotá – Cundinamarca", "Barranca de Upía – Meta"], respuestaCorrecta: 2 },
-  
-  { id: 10, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿En cuántas hectáreas ha trabajado Sirius con aplicaciones de biochar y bioinsumos?", opciones: ["Más de 6.000 hectáreas", "Más de 10.000 hectáreas", "Más de 13.000 hectáreas"], respuestaCorrecta: 0 },
-  { id: 11, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "En este Congreso estamos lanzando el libro titulado:", opciones: ["La expedición de Doña Pepa", "Los caminos del oso palmero", "Las aventuras de Doña Pepa", "El viaje del chigüiro"], respuestaCorrecta: 2 },
-  { id: 12, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Cuáles de estos conceptos NO hacen parte del modelo de trabajo de la Fundación Guaicaramo?", opciones: ["El valor compartido", "El fortalecimiento institucional", "El ordenamiento territorial", "El trabajo en el ser", "La construcción de parques"], respuestaCorrecta: 4 },
-  { id: 13, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Cuáles de los siguientes son productos con semilla?", opciones: ["Canola, Girasol y Soya", "Aguacate, Oliva y Palma Alto Oleico", "Ninguna de las anteriores"], respuestaCorrecta: 0 },
-  { id: 14, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿Cuáles son los principales beneficios del biochar?", opciones: ["Regula el pH del suelo y aumenta la capacidad de intercambio catiónico (CIC)", "Retiene humedad y mejora la resiliencia en épocas de sequía", "Captura y fija carbono atmosférico por miles de años, además de mejorar la porosidad y oxigenación del suelo", "Contribuye a la regeneración: mejora la salud del suelo y se convierte en una vivienda ideal para los microorganismos, gracias a su nanostructura", "Todas las anteriores"], respuestaCorrecta: 4 },
-
-  { id: 15, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "¿Qué tipo de proyecto sostenible implementado en Guaicaramo ayuda a mejorar la calidad de las aguas residuales?", opciones: ["Reciclaje", "Humedales artificiales", "Siembra de árboles", "Compostaje"], respuestaCorrecta: 1 },
-  { id: 16, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Con qué propósito se creó la Fundación Guaicaramo?", opciones: ["Ser un vehículo de responsabilidad social empresarial.", "Impulsar la filantropía en la zona de Barranca de Upía.", "Ahorrar en impuestos.", "Ser un agente de cambio local a través de un modelo de desarrollo territorial sostenible."], respuestaCorrecta: 3 },
-  { id: 17, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Qué certificaciones respaldan el compromiso de DAO con la sostenibilidad?", opciones: ["RSPO, Cero Deforestación, APSColombia", "ISCC, EUDR, Seedless Oils", "Todas las anteriores"], respuestaCorrecta: 2 },
-  { id: 18, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿Cómo se llama el proceso por medio del cual se transforman biomasas en biochar?", opciones: ["Pirolisis", "Compostaje", "Fermentación anaerobia"], respuestaCorrecta: 0 },
-  { id: 19, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "En el tratamiento de aguas residuales, logramos obtener un recurso energético. ¿Cuál es?", opciones: ["Carbón", "Gasolina", "Diésel", "Biogás"], respuestaCorrecta: 3 },
-  { id: 20, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "Verdadero o falso:\nLa Fundación Guaicaramo está interesada en desarrollar proyectos de vivienda de interés social para que más personas puedan tener un hogar.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 1 },
-  { id: 21, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Verdadero o falso?\nLa Fundación Guaicaramo tiene como único enfoque la educación del territorio. Por eso ha invertido únicamente en tener cursos y en apoyar a la institución educativa.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 1 },
-  { id: 22, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Verdadero o falso?\nDesde su concepción, la Fundación Guaicaramo ha tenido un componente ambiental y, a través de él, ha trabajado en mapear las cuencas hídricas del territorio, apoyar proyectos de reforestación, construir viveros y acompañar la formación de clubes verdes con los jóvenes.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 0 },
-  { id: 23, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Verdadero o falso?\nEl aceite alto oleico es como un \"aceite de oliva del trópico\": proviene de un fruto y no de una semilla, aporta vitaminas y minerales, tiene un punto de fritura más alto (lo que le da mayor resistencia y eficiencia en el fritado), se necesita en menor cantidad, es beneficioso para la salud y, cultivado de manera regenerativa, puede ser incluso climáticamente positivo.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 0 },
-  { id: 24, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Verdadero o falso?\nEl aceite de palma alto oleico en Colombia consume más agua y deteriora los suelos.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 1 },
-  { id: 25, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Por qué el aceite alto oleico se considera mejor que los aceites de semillas?", opciones: ["Porque proviene de un fruto y no de una semilla, lo que reduce el procesamiento industrial.", "Porque se cultiva en modelos agroforestales sostenibles que regeneran el suelo y capturan carbono.", "Porque es rico en ácido oleico (grasa monoinsaturada), estable al calor y saludable para el consumo.", "Todas las anteriores."], respuestaCorrecta: 3 },
-  { id: 26, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Cuál de los siguientes NO es un objetivo principal de la empresa Del Llano Alto Oleico?", opciones: ["Buscar un mercado de valor agregado para el aceite alto oleico.", "Emprender en la misión de llegar al consumidor final con un producto de alta calidad.", "Diversificar el mercado de los aceites y apostarle al futuro.", "Ampliar márgenes económicos.", "Porque en Colombia es difícil conseguir 100% aceite de palma alto oleico."], respuestaCorrecta: 3 }
-];
-
-// Base de datos de datos curiosos por empresa
-const datosCuriosos = {
-  'fundacion': [
-    "🌱 Origen social: Nació en 2014 como vehículo independiente de inversión social del grupo.",
-    "🏘️ Impacto real: En 2022 benefició a más de 1.000 familias en Barranca de Upía y Villanueva.",
-    "👵 Identidad pedagógica: 'Doña Pepa' es el personaje que acompaña el bienestar de la comunidad.",
-    "🤝 Modelo de trabajo: La Fundación Guaicaramo siempre ha buscado ir más allá de la filantropía tradicional. Su apuesta es por la inversión social estratégica, donde conceptos como el valor compartido, el fortalecimiento institucional, el ordenamiento territorial y el trabajo en el ser generan retornos profundos y sostenibles para el territorio. La construcción de parques, aunque valiosa, no hace parte central del modelo.",
-    "🤝 Brazo social: La Fundación Guaicaramo no nació para el bienestar interno de los colaboradores —esa labor la cumple otra área de la empresa—, sino para ir más allá y construir una estrategia de desarrollo territorial sostenible, que impulse el progreso de las comunidades y municipios de la región.",
-    "🏠 Visión holística: La visión de la Fundación Guaicaramo no es construir vivienda como fin en sí mismo, sino construir comunidad. La infraestructura puede ser un componente, pero lo esencial es un modelo holístico que impulse el bienestar, la armonía con la naturaleza y el uso de la tecnología para generar desarrollo sostenible. La Fundación no busca ser \"una más\" en proyectos de VIS, sino soñar y materializar territorios integrales",
-    "📚 Enfoque integral: La educación es un pilar fundamental, pero no es el único. La Fundación Guaicaramo también cuenta con un equipo técnico que formula proyectos de desarrollo territorial de largo plazo. Uno de sus mayores logros ha sido la aprobación de un proyecto de obras por impuestos para la institución educativa de Barranca de Upía, que está siendo implementado para dotar la escuela con tecnología, capacitar a los profesores y cerrar brechas de calidad educativa.",
-    "🌿 Compromiso ambiental: El cuidado ambiental ha sido un pilar de la Fundación Guaicaramo desde sus inicios. Su labor va más allá de lo social y educativo: ha promovido la gestión integral del agua, la reforestación, la creación de viveros comunitarios y la vinculación de la juventud en clubes verdes, sembrando así conciencia y compromiso ambiental en el territorio."
-  ],
-  'dao': [
-    "💯 Visión clara: Su promesa es 'nunca perder tu confianza'.",
-    "📈 Crecimiento sostenido: Comunican aceptación continua del mercado año tras año.",
-    "🌍 Agricultura consciente: Reconocen a la 'madre tierra' como base de su narrativa.",
-    "⚙️ Innovación tecnológica: Mejoras en planta para eficiencia logística y de procesos.",
-    "🌐 Nuestro sitio web es bilingüe, permitiendo una navegación global.",
-    "🌿 Aceite premium: El aceite alto oleico es un aceite premium del trópico, comparable al aceite de oliva por su perfil saludable y su desempeño culinario. Su recorrido empresarial ha validado estas hipótesis: Mercado internacional (ha entrado al mercado estadounidense), calidad en cocina (mayor crocancia y rendimiento), nutrición (estudios recientes muestran bondades subestimadas), clima y biodiversidad (huella de carbono positiva, remueve carbono por litro, empleos dignos y uso de biológicos para proteger biodiversidad).",
-    "🌱 Bendición agrícola: La palma híbrida alto oleico es en realidad una bendición agrícola y ambiental: Es resiliente ante los cambios climáticos y resistente a enfermedades. Es más productiva por hectárea que cualquier otro cultivo de aceites en el mundo. En Colombia se siembra sobre pasturas degradadas, transformándolas en ecosistemas productivos. Con el tiempo, estas áreas se convierten en hábitats diversos que aportan a la regeneración de la biodiversidad local.",
-    "🌾 Ventaja sostenible: Hoy en día el mercado reconoce que los aceites de semillas requieren procesos industriales intensivos y provienen de cultivos de ciclo corto con alto uso de agroquímicos. En contraste, el aceite alto oleico: Se obtiene de un fruto, sin necesidad de procesamientos químicos agresivos. Se cultiva en sistemas agroforestales de largo plazo, que regeneran el suelo y aportan al clima positivo. Tiene un perfil nutricional comparable al del aceite de oliva: rico en ácido oleico, más estable al calor y mejor para la salud.",
-    "🎯 Visión empresarial: Del Llano Alto Oleico es el resultado de una visión construida durante décadas. Mauricio Herrera Vélez y Philippe Genty impulsaron un cruce genético que permitió desarrollar la palma híbrida alto oleico. Al descubrir las grandes bondades de este aceite, nació la convicción de que merecía tener su propio mercado. Por eso se creó esta empresa como un vehículo no solo de comercialización, sino de valor agregado, diversificación y conexión directa con el consumidor final."
-  ],
-  'guaicaramo': [
-    "⚡ Energía limpia: Generan energía renovable con biogás de aguas residuales.",
-    "🦋 Biodiversidad activa: Mantienen Áreas de Alto Valor de Conservación (AVC) y concursos de avistamiento.",
-    "📸 Fauna protegida: Cámaras trampa han registrado más de 30 especies, incluido el ocelote.",
-    "🔄 Diversificación: Negocios en aceites, cítricos, ganadería y biocombustibles.",
-    "🏅 Certificaciones verdes: RSPO, ISCC y Cero Deforestación avalan su gestión ambiental."
-  ],
-  'sirius': [
-    "🔬 Evolución tecnológica: Rediseño de planta de pirólisis en 2024 (Rafaela 2.0).",
-    "🎯 Portafolio innovador: Biochar Blend, Star Dust y Sirius Bacter.",
-    "🎯 Meta 2030: Regenerar 100.000 ha; ya reportan 8.750 ha y 2.450 t de CO₂ capturadas.",
-    "🤖 Triple enfoque: Integran pirólisis + biotecnología + IA (Agentics, Piroliapp y Alma).",
-    "📍 Raíz local: Operan desde Barranca de Upía con datos de contacto claros en su web."
-  ]
+// Base de datos de preguntas y datos curiosos reorganizados por empresa
+const preguntasPorEmpresa = {
+  'fundacion': {
+    color: '#D1BA30',
+    logo: '/media/Logo-Fundacion.png',
+    preguntas: [
+      { id: 0, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Hace cuantos años se fundó la Fundación Guaicaramo?", opciones: ["12 AÑOS", "15 AÑOS", "8 AÑOS"], respuestaCorrecta: 0 },
+      { id: 1, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Cuántas personas se han visto beneficiadas en las zonas de influencia?", opciones: ["+ 5.000 beneficiados", "+ 10.000 beneficiados", "No ha habido beneficiados"], respuestaCorrecta: 1 },
+      { id: 2, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Cuántos son los municipios impactados por la labor realizada por la fundación Guaicaramo?", opciones: ["32 Municipios", "4 Municipios", "12 Municipios"], respuestaCorrecta: 1 },
+      { id: 3, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Cuáles de estos conceptos NO hacen parte del modelo de trabajo de la Fundación Guaicaramo?", opciones: ["El valor compartido", "El fortalecimiento institucional", "El ordenamiento territorial", "El trabajo en el ser", "La construcción de parques"], respuestaCorrecta: 4 },
+      { id: 4, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Con qué propósito se creó la Fundación Guaicaramo?", opciones: ["Ser un vehículo de responsabilidad social empresarial.", "Impulsar la filantropía en la zona de Barranca de Upía.", "Ahorrar en impuestos.", "Ser un agente de cambio local a través de un modelo de desarrollo territorial sostenible."], respuestaCorrecta: 3 },
+      { id: 5, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "Verdadero o falso:\nLa Fundación Guaicaramo está interesada en desarrollar proyectos de vivienda de interés social para que más personas puedan tener un hogar.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 1 },
+      { id: 6, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Verdadero o falso?\nLa Fundación Guaicaramo tiene como único enfoque la educación del territorio. Por eso ha invertido únicamente en tener cursos y en apoyar a la institución educativa.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 1 },
+      { id: 7, empresa: 'fundacion', color: '#D1BA30', logo: '/media/Logo-Fundacion.png', pregunta: "¿Verdadero o falso?\nDesde su concepción, la Fundación Guaicaramo ha tenido un componente ambiental y, a través de él, ha trabajado en mapear las cuencas hídricas del territorio, apoyar proyectos de reforestación, construir viveros y acompañar la formación de clubes verdes con los jóvenes.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 0 }
+    ],
+    datosCuriosos: [
+      "🌱 Origen social: Nació en 2014 como vehículo independiente de inversión social del grupo.",
+      "🏘️ Impacto real: En 2022 benefició a más de 1.000 familias en Barranca de Upía y Villanueva.",
+      "👵 Identidad pedagógica: 'Doña Pepa' es el personaje que acompaña el bienestar de la comunidad.",
+      "🤝 Modelo de trabajo: La Fundación Guaicaramo siempre ha buscado ir más allá de la filantropía tradicional. Su apuesta es por la inversión social estratégica, donde conceptos como el valor compartido, el fortalecimiento institucional, el ordenamiento territorial y el trabajo en el ser generan retornos profundos y sostenibles para el territorio. La construcción de parques, aunque valiosa, no hace parte central del modelo.",
+      "🤝 Brazo social: La Fundación Guaicaramo no nació para el bienestar interno de los colaboradores —esa labor la cumple otra área de la empresa—, sino para ir más allá y construir una estrategia de desarrollo territorial sostenible, que impulse el progreso de las comunidades y municipios de la región.",
+      "🏠 Visión holística: La visión de la Fundación Guaicaramo no es construir vivienda como fin en sí mismo, sino construir comunidad. La infraestructura puede ser un componente, pero lo esencial es un modelo holístico que impulse el bienestar, la armonía con la naturaleza y el uso de la tecnología para generar desarrollo sostenible. La Fundación no busca ser \"una más\" en proyectos de VIS, sino soñar y materializar territorios integrales",
+      "📚 Enfoque integral: La educación es un pilar fundamental, pero no es el único. La Fundación Guaicaramo también cuenta con un equipo técnico que formula proyectos de desarrollo territorial de largo plazo. Uno de sus mayores logros ha sido la aprobación de un proyecto de obras por impuestos para la institución educativa de Barranca de Upía, que está siendo implementado para dotar la escuela con tecnología, capacitar a los profesores y cerrar brechas de calidad educativa.",
+      "🌿 Compromiso ambiental: El cuidado ambiental ha sido un pilar de la Fundación Guaicaramo desde sus inicios. Su labor va más allá de lo social y educativo: ha promovido la gestión integral del agua, la reforestación, la creación de viveros comunitarios y la vinculación de la juventud en clubes verdes, sembrando así conciencia y compromiso ambiental en el territorio."
+    ]
+  },
+  'dao': {
+    color: '#2D753E',
+    logo: '/media/Logo-DAO.png',
+    preguntas: [
+      { id: 8, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Hace cuantos años se fundó Del Llano Alto Oleico - DAO?", opciones: ["12 AÑOS", "10 AÑOS", "8 AÑOS"], respuestaCorrecta: 1 },
+      { id: 9, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Verdadero o falso?\nEl aceite alto oleico es como un \"aceite de oliva del trópico\": proviene de un fruto y no de una semilla, aporta vitaminas y minerales, tiene un punto de fritura más alto (lo que le da mayor resistencia y eficiencia en el fritado), se necesita en menor cantidad, es beneficioso para la salud y, cultivado de manera regenerativa, puede ser incluso climáticamente positivo.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 0 },
+      { id: 10, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Verdadero o falso?\nEl aceite de palma alto oleico en Colombia consume más agua y deteriora los suelos.", opciones: ["Verdadero", "Falso"], respuestaCorrecta: 1 },
+      { id: 11, empresa: 'dao', color: '#2D753E', logo: '/media/Logo-DAO.png', pregunta: "¿Cuál de los siguientes NO es un objetivo principal de la empresa Del Llano Alto Oleico?", opciones: ["Buscar un mercado de valor agregado para el aceite alto oleico.", "Emprender en la misión de llegar al consumidor final con un producto de alta calidad.", "Diversificar el mercado de los aceites y apostarle al futuro.", "Ampliar márgenes económicos.", "Porque en Colombia es difícil conseguir 100% aceite de palma alto oleico."], respuestaCorrecta: 3 }
+    ],
+    datosCuriosos: [
+      "💯 Visión clara: Su promesa es 'nunca perder tu confianza'.",
+      " Aceite premium: El aceite alto oleico es un aceite premium del trópico, comparable al aceite de oliva por su perfil saludable y su desempeño culinario. Su recorrido empresarial ha validado estas hipótesis: Mercado internacional (ha entrado al mercado estadounidense), calidad en cocina (mayor crocancia y rendimiento), nutrición (estudios recientes muestran bondades subestimadas), clima y biodiversidad (huella de carbono positiva, remueve carbono por litro, empleos dignos y uso de biológicos para proteger biodiversidad).",
+      "🌱 Bendición agrícola: La palma híbrida alto oleico es en realidad una bendición agrícola y ambiental: Es resiliente ante los cambios climáticos y resistente a enfermedades. Es más productiva por hectárea que cualquier otro cultivo de aceites en el mundo. En Colombia se siembra sobre pasturas degradadas, transformándolas en ecosistemas productivos. Con el tiempo, estas áreas se convierten en hábitats diversos que aportan a la regeneración de la biodiversidad local.",
+      "🎯 Visión empresarial: Del Llano Alto Oleico es el resultado de una visión construida durante décadas. Mauricio Herrera Vélez y Philippe Genty impulsaron un cruce genético que permitió desarrollar la palma híbrida alto oleico. Al descubrir las grandes bondades de este aceite, nació la convicción de que merecía tener su propio mercado. Por eso se creó esta empresa como un vehículo no solo de comercialización, sino de valor agregado, diversificación y conexión directa con el consumidor final."
+    ]
+  },
+  'sirius': {
+    color: '#00A3FF',
+    logo: '/media/Logo-Sirius.png',
+    preguntas: [
+      { id: 17, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿En cuántas hectáreas ha trabajado Sirius con aplicaciones de biochar y bioinsumos?", opciones: ["Más de 6.000 hectáreas", "Más de 10.000 hectáreas", "Más de 13.000 hectáreas"], respuestaCorrecta: 0 },
+      { id: 18, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿Cuáles son los principales beneficios del biochar?", opciones: ["Regula el pH del suelo y aumenta la capacidad de intercambio catiónico (CIC)", "Retiene humedad y mejora la resiliencia en épocas de sequía", "Captura y fija carbono atmosférico por miles de años, además de mejorar la porosidad y oxigenación del suelo", "Contribuye a la regeneración: mejora la salud del suelo y se convierte en una vivienda ideal para los microorganismos, gracias a su nanostructura", "Todas las anteriores"], respuestaCorrecta: 4 },
+      { id: 19, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta: "¿Cómo se llama el proceso por medio del cual se transforman biomasas en biochar?", opciones: ["Pirolisis", "Compostaje", "Fermentación anaerobia"], respuestaCorrecta: 0 }
+    ],
+    datosCuriosos: [
+      "🎯 Meta 2030: Regenerar 100.000 ha; ya reportan 8.750 ha y 2.450 t de CO₂ capturadas.",
+      "🤖 Triple enfoque: Integran pirólisis + biotecnología + IA (Agentics, Piroliapp y Alma).",
+      "📍 Raíz local: Operan desde Barranca de Upía con datos de contacto claros en su web."
+    ]
+  },
+  'guaicaramo': {
+    color: '#D97523',
+    logo: '/media/logo-Guaicaramo.png',
+    preguntas: [
+      { id: 12, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "Durante los últimos 4 años, Doña Pepa ha tenido un propósito principal. ¿Cuál ha sido?", opciones: ["La productividad", "El buen trato", "La disciplina", "El orden y aseo"], respuestaCorrecta: 1 },
+      { id: 13, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "Generamos alianzas con empresas del sector para proteger y conservar al:", opciones: ["Oso palmero", "Chigüiro", "Venado", "Jaguar"], respuestaCorrecta: 0 },
+      { id: 14, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "En este Congreso estamos lanzando el libro titulado:", opciones: ["La expedición de Doña Pepa", "Los caminos del oso palmero", "Las aventuras de Doña Pepa", "El viaje del chigüiro"], respuestaCorrecta: 2 },
+      { id: 15, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "¿Qué tipo de proyecto sostenible implementado en Guaicaramo ayuda a mejorar la calidad de las aguas residuales?", opciones: ["Reciclaje", "Humedales artificiales", "Siembra de árboles", "Compostaje"], respuestaCorrecta: 1 },
+      { id: 16, empresa: 'guaicaramo', color: '#D97523', logo: '/media/logo-Guaicaramo.png', pregunta: "En el tratamiento de aguas residuales, logramos obtener un recurso energético. ¿Cuál es?", opciones: ["Carbón", "Gasolina", "Diésel", "Biogás"], respuestaCorrecta: 3 }
+    ],
+    datosCuriosos: [
+      "⚡ Energía limpia: Generan energía renovable con biogás de aguas residuales.",
+      "🦋 Biodiversidad activa: Mantienen Áreas de Alto Valor de Conservación (AVC) y concursos de avistamiento.",
+      "📸 Fauna protegida: Cámaras trampa han registrado más de 30 especies, incluido el ocelote.",
+      "🔄 Diversificación: Negocios en aceites, cítricos, ganadería y biocombustibles.",
+      "🏅 Certificaciones verdes: RSPO, ISCC y Cero Deforestación avalan su gestión ambiental."
+    ]
+  }
 };
 
 // Variables globales
@@ -87,18 +89,11 @@ let rotacionAcumulada = 0;
 
 // Función para seleccionar preguntas para el juego actual
 function seleccionarPreguntasParaJuego() {
-  const preguntasPorEmpresa = {
-    'fundacion': todasLasPreguntas.filter(p => p.empresa === 'fundacion'),
-    'dao': todasLasPreguntas.filter(p => p.empresa === 'dao'),
-    'sirius': todasLasPreguntas.filter(p => p.empresa === 'sirius'),
-    'guaicaramo': todasLasPreguntas.filter(p => p.empresa === 'guaicaramo')
-  };
-  
   const preguntasSeleccionadas = [];
   
   // Seleccionar 1 pregunta de cada empresa (4 preguntas)
   Object.keys(preguntasPorEmpresa).forEach(empresa => {
-    const preguntasEmpresa = preguntasPorEmpresa[empresa];
+    const preguntasEmpresa = preguntasPorEmpresa[empresa].preguntas;
     if (preguntasEmpresa.length > 0) {
       const preguntaAleatoria = preguntasEmpresa[Math.floor(Math.random() * preguntasEmpresa.length)];
       preguntasSeleccionadas.push(preguntaAleatoria);
@@ -106,6 +101,7 @@ function seleccionarPreguntasParaJuego() {
   });
   
   // Seleccionar 1 pregunta adicional aleatoria de cualquier empresa (5ta pregunta)
+  const todasLasPreguntas = Object.values(preguntasPorEmpresa).flatMap(e => e.preguntas);
   const preguntaAdicional = todasLasPreguntas[Math.floor(Math.random() * todasLasPreguntas.length)];
   preguntasSeleccionadas.push(preguntaAdicional);
   
@@ -441,8 +437,8 @@ function verificarRespuesta(indiceSeleccionado) {
   });
   
   // Obtener dato curioso correspondiente a esta pregunta
-  const datosCuriosEmpresa = datosCuriosos[preguntaActual.empresa];
-  const indicePregunta = todasLasPreguntas.filter(p => p.empresa === preguntaActual.empresa).findIndex(p => p.id === preguntaActual.id);
+  const datosCuriosEmpresa = preguntasPorEmpresa[preguntaActual.empresa].datosCuriosos;
+  const indicePregunta = preguntasPorEmpresa[preguntaActual.empresa].preguntas.findIndex(p => p.id === preguntaActual.id);
   const datoCurioso = datosCuriosEmpresa[indicePregunta % datosCuriosEmpresa.length];
   
   // Mostrar resultado
@@ -588,5 +584,6 @@ document.addEventListener('DOMContentLoaded', function() {
   actualizarContadores();
   actualizarRuleta();
   console.log('🌴 Trivia Fundación Guaicaramo iniciada');
-  console.log('📚 Preguntas disponibles:', todasLasPreguntas.length);
+  const totalPreguntas = Object.values(preguntasPorEmpresa).reduce((sum, e) => sum + e.preguntas.length, 0);
+  console.log('📚 Preguntas disponibles:', totalPreguntas);
 });
