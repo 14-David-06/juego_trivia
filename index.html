@@ -14,8 +14,8 @@
             <img src="/media/Logo-Sirius.png" alt="Logo Sirius" class="logo logo-sirius">
             <img src="/media/Logo-Fundacion.png" alt="Logo Fundación Guaicaramo" class="logo logo-fundacion">
         </div>
-        <h1 class="title">🌴 TRIVIA GUAICARAMO 🌴</h1>
-        <p class="subtitle">¡Participa por nuestros premios!</p>
+        <h1 class="title" id="titulo">🌴 TRIVIA GUAICARAMO 🌴</h1>
+        <p class="subtitle" id="subtitulo">¡Participa por nuestros premios!</p>
     </div>
 
     <div class="score-section">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <button class="spin-btn" id="spin-btn" onclick="iniciarJuego()">
+    <button class="spin-btn" id="spin-btn" onclick="mostrarModalIdioma()">
         🚀 ¡INICIAR JUEGO!
     </button>
     
@@ -70,11 +70,11 @@
     <div class="custom-modal" id="confirm-restart-modal">
         <div class="modal-content">
             <div class="modal-icon">🔄</div>
-            <h3>¿Reiniciar Juego?</h3>
-            <p>¿Estás seguro de que quieres reiniciar el juego? Se perderá todo el progreso actual.</p>
+            <h3 id="reiniciar-titulo">¿Reiniciar Juego?</h3>
+            <p id="reiniciar-mensaje">¿Estás seguro de que quieres reiniciar el juego? Se perderá todo el progreso actual.</p>
             <div class="modal-buttons">
-                <button class="modal-btn confirm-btn" onclick="confirmarReinicio()">Sí, Reiniciar</button>
-                <button class="modal-btn cancel-btn" onclick="cerrarModalReinicio()">Cancelar</button>
+                <button class="modal-btn confirm-btn" onclick="confirmarReinicio()" id="btn-si-reiniciar">Sí, Reiniciar</button>
+                <button class="modal-btn cancel-btn" onclick="cerrarModalReinicio()" id="btn-cancelar">Cancelar</button>
             </div>
         </div>
     </div>
@@ -99,6 +99,19 @@
             <div class="result-stats" id="result-stats"></div>
             <div class="modal-buttons">
                 <button class="modal-btn confirm-btn" onclick="cerrarResultadoFinal()">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Selección de Idioma -->
+    <div class="custom-modal" id="language-modal">
+        <div class="modal-content">
+            <div class="modal-icon">🌐</div>
+            <h3>Selecciona el idioma / Select Language</h3>
+            <p>¿En qué idioma deseas jugar? / What language do you want to play in?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm-btn" onclick="seleccionarIdioma('es')">Español</button>
+                <button class="modal-btn confirm-btn" onclick="seleccionarIdioma('en')">English</button>
             </div>
         </div>
     </div>
