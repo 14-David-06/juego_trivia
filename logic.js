@@ -63,7 +63,7 @@ const preguntasPorEmpresa = {
       { id: 17, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta_es: "¿De que tamaño son la mayoria de las estrellas fugaces?", pregunta_en: "What size are most shooting stars?", opciones_es: ["Del tamaño del sol", "Mas grande que nuestro planeta", "Del tamaño de un fruto de palma", "Del tamaño de un autobus", "Del tamaño de un grano de arroz"], opciones_en: ["The size of the sun", "Bigger than our planet", "The size of a palm fruit", "The size of a bus", "The size of a grain of rice"], respuestaCorrecta: 4 },
       { id: 18, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta_es: "¿Cuáles son los principales beneficios del biochar?", pregunta_en: "What are the main benefits of biochar?", opciones_es: ["Regula el pH del suelo y aumenta la capacidad de intercambio catiónico (CIC)", "Retiene humedad y mejora la resiliencia en épocas de sequía", "Captura y fija carbono atmosférico por miles de años, además de mejorar la porosidad y oxigenación del suelo", "Contribuye a la regeneración: mejora la salud del suelo y se convierte en una vivienda ideal para los microorganismos, gracias a su nanostructura", "Todas las anteriores"], opciones_en: ["Regulates soil pH and increases cation exchange capacity (CEC)", "Retains moisture and improves resilience in drought periods", "Captures and fixes atmospheric carbon for thousands of years, in addition to improving soil porosity and oxygenation", "Contributes to regeneration: improves soil health and becomes an ideal home for microorganisms, thanks to its nanostructure", "All of the above"], respuestaCorrecta: 4 },
       { id: 19, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta_es: "¿Cómo se llama el proceso por medio del cual se transforman biomasas en biochar?", pregunta_en: "What is the name of the process by which biomasses are transformed into biochar?", opciones_es: ["Pirolisis", "Compostaje", "Fermentación anaerobia"], opciones_en: ["Pyrolysis", "Composting", "Anaerobic fermentation"], respuestaCorrecta: 0 },
-      { id: 20, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta_es: "¿Cual estos valores no hace parte del toque Sirius?", pregunta_en: "Which of these values is NOT part of the Sirius touch?", opciones_es: ["Transparencia", "Energia limpia", "Perrenque", "Pulidez", "Esfuerzo"], opciones_en: ["Transparency", "Clean energy", "Perseverance", "Politeness", "Effort"], respuestaCorrecta: 4 },
+      { id: 20, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta_es: "¿Cual de estos valores no hace parte del toque Sirius?", pregunta_en: "Which of these values is NOT part of the Sirius touch?", opciones_es: ["Transparencia", "Energia limpia", "Perrenque", "Pulidez", "Esfuerzo"], opciones_en: ["Transparency", "Clean energy", "Perseverance", "Politeness", "Effort"], respuestaCorrecta: 4 },
       { id: 21, empresa: 'sirius', color: '#00A3FF', logo: '/media/Logo-Sirius.png', pregunta_es: "Verdadero o Falso, ¿la sostenibilidad es todo para nosotros?", pregunta_en: "True or False, is sustainability everything for us?", opciones_es: ["Verdadero", "Falso"], opciones_en: ["True", "False"], respuestaCorrecta: 1 }
     ],
     datosCuriosos_es: [
@@ -120,6 +120,19 @@ const traduccionesUI = {
     reiniciar: "Reiniciar",
     iniciarJuego: "🚀 ¡INICIAR JUEGO!",
     girarRuleta: "🎯 ¡GIRAR RULETA!",
+    girando: "🌪 GIRANDO...",
+    juegoTerminado: "🏁 JUEGO TERMINADO",
+    continuar: "Continuar",
+    juegoReiniciado: "¡Juego Reiniciado!",
+    mensajeReinicio: "¡Perfecto! El juego se ha reiniciado correctamente. Haz clic en \"INICIAR JUEGO\" para comenzar.",
+    excelente: "¡EXCELENTE!",
+    muyBien: "¡MUY BIEN!",
+    sigueIntentando: "¡SIGUE INTENTANDO!",
+    respuestasCorrectas: "Respuestas Correctas:",
+    respuestasIncorrectas: "Respuestas Incorrectas:",
+    porcentajeAcierto: "Porcentaje de Acierto:",
+    puntuacionFinal: "Puntuación Final:",
+    puntos: "puntos",
     reglaJuego: "Regla del juego",
     descripcionRegla: "Gira la ruleta, cada respuesta correcta te da 10 puntos, para ganar uno de nuestros premios debes acertar mínimo 3 preguntas.",
     desarrolladoPor: "Este juego fue desarrollado con mucho ❤️ por los niños del grupo de sistemas de la Fundación Guaicaramo.",
@@ -148,6 +161,19 @@ const traduccionesUI = {
     reiniciar: "Restart",
     iniciarJuego: "🚀 START GAME!",
     girarRuleta: "🎯 SPIN ROULETTE!",
+    girando: "🌪 SPINNING...",
+    juegoTerminado: "🏁 GAME OVER",
+    continuar: "Continue",
+    juegoReiniciado: "Game Restarted!",
+    mensajeReinicio: "Perfect! The game has been restarted successfully. Click \"START GAME\" to begin.",
+    excelente: "EXCELLENT!",
+    muyBien: "VERY GOOD!",
+    sigueIntentando: "KEEP TRYING!",
+    respuestasCorrectas: "Correct Answers:",
+    respuestasIncorrectas: "Incorrect Answers:",
+    porcentajeAcierto: "Success Rate:",
+    puntuacionFinal: "Final Score:",
+    puntos: "points",
     reglaJuego: "Game rule",
     descripcionRegla: "Spin the wheel, each correct answer gives you 10 points, to win one of our prizes you must get at least 3 questions right.",
     desarrolladoPor: "This game was developed with a lot of ❤️ by the children of the systems group of Fundación Guaicaramo.",
@@ -271,13 +297,13 @@ function ejecutarReinicio() {
   document.getElementById('spin-btn').style.display = 'block';
   document.getElementById('girar-btn').style.display = 'none';
   document.getElementById('girar-btn').disabled = false;
-  document.getElementById('girar-btn').textContent = '🎯 ¡GIRAR RULETA!';
+  document.getElementById('girar-btn').textContent = traduccionesUI[idiomaActual].girarRuleta;
   
   // Resetear ruleta a posición inicial
   document.getElementById('wheel').style.transform = 'rotate(0deg)';
   actualizarRuleta();
   
-  mostrarModalConAutoCierre('🔄', '¡Juego Reiniciado!', '¡Perfecto! El juego se ha reiniciado correctamente. Haz clic en "INICIAR JUEGO" para comenzar.', 2500);
+  mostrarModalConAutoCierre('🔄', traduccionesUI[idiomaActual].juegoReiniciado, traduccionesUI[idiomaActual].mensajeReinicio, 2500);
 }
 
 // Función para iniciar el juego
@@ -365,7 +391,7 @@ function girarRuleta() {
   
   // Deshabilitar botón
   girarBtn.disabled = true;
-  girarBtn.textContent = '🌪 GIRANDO...';
+  girarBtn.textContent = traduccionesUI[idiomaActual].girando;
   
   // RESETEAR RULETA A 0° INSTANTÁNEAMENTE (sin animación, invisible al usuario)
   wheel.style.transition = 'none'; // Quitar animación temporalmente
@@ -461,11 +487,11 @@ function girarRuleta() {
     
     if (tirosRestantes > 0 && preguntasRestantes.length > 0) {
       girarBtn.disabled = false;
-      girarBtn.textContent = '🎯 ¡GIRAR RULETA!';
+      girarBtn.textContent = traduccionesUI[idiomaActual].girarRuleta;
     } else {
       juegoTerminado = true;
       girarBtn.disabled = true;
-      girarBtn.textContent = '🏁 JUEGO TERMINADO';
+      girarBtn.textContent = traduccionesUI[idiomaActual].juegoTerminado;
     }
     
     // Mostrar pregunta
@@ -579,6 +605,7 @@ function verificarRespuesta(indiceSeleccionado) {
   resultMessage.innerHTML = mensajeCompleto;
   resultMessage.style.display = 'block';
   closeBtn.style.display = 'inline-block';
+  closeBtn.textContent = traduccionesUI[idiomaActual].continuar;
 }
 
 // Función para cerrar pregunta
@@ -619,13 +646,13 @@ function mostrarResultadoFinal() {
   
   if (respuestasCorrectas >= 4) {
     emoji = '🏆';
-    titulo = '¡EXCELENTE!';
+    titulo = traduccionesUI[idiomaActual].excelente;
   } else if (respuestasCorrectas >= 3) {
     emoji = '🎉';
-    titulo = '¡MUY BIEN!';
+    titulo = traduccionesUI[idiomaActual].muyBien;
   } else {
     emoji = '💪';
-    titulo = '¡SIGUE INTENTANDO!';
+    titulo = traduccionesUI[idiomaActual].sigueIntentando;
   }
   
   // Actualizar modal de resultado
@@ -633,14 +660,18 @@ function mostrarResultadoFinal() {
   document.getElementById('result-title').textContent = titulo;
   
   const statsHTML = `
-    <p><strong>Respuestas Correctas:</strong> ${respuestasCorrectas}/5</p>
-    <p><strong>Respuestas Incorrectas:</strong> ${respuestasIncorrectas}/5</p>
-    <p class="percentage"><strong>Porcentaje de Acierto:</strong> ${porcentaje}%</p>
-    <p class="score"><strong>Puntuación Final:</strong> ${puntuacion} puntos</p>
+    <p><strong>${traduccionesUI[idiomaActual].respuestasCorrectas}</strong> ${respuestasCorrectas}/5</p>
+    <p><strong>${traduccionesUI[idiomaActual].respuestasIncorrectas}</strong> ${respuestasIncorrectas}/5</p>
+    <p class="percentage"><strong>${traduccionesUI[idiomaActual].porcentajeAcierto}</strong> ${porcentaje}%</p>
+    <p class="score"><strong>${traduccionesUI[idiomaActual].puntuacionFinal}</strong> ${puntuacion} ${traduccionesUI[idiomaActual].puntos}</p>
   `;
   
   document.getElementById('result-stats').innerHTML = statsHTML;
   document.getElementById('result-modal').classList.add('show');
+  
+  // Actualizar texto del botón continuar en el modal de resultado
+  const resultContinueBtn = document.querySelector('#result-modal .modal-btn.confirm-btn');
+  if (resultContinueBtn) resultContinueBtn.textContent = traduccionesUI[idiomaActual].continuar;
 }
 
 // Función para cerrar resultado final y reiniciar automáticamente
@@ -664,7 +695,7 @@ function cerrarResultadoFinal() {
   document.getElementById('spin-btn').style.display = 'block';
   document.getElementById('girar-btn').style.display = 'none';
   document.getElementById('girar-btn').disabled = false;
-  document.getElementById('girar-btn').textContent = '🎯 ¡GIRAR RULETA!';
+  document.getElementById('girar-btn').textContent = traduccionesUI[idiomaActual].girarRuleta;
   
   // Resetear ruleta a posición inicial
   document.getElementById('wheel').style.transform = 'rotate(0deg)';
@@ -715,6 +746,12 @@ function actualizarTextosUI() {
   if (btnSiReiniciar) btnSiReiniciar.textContent = traduccionesUI[idiomaActual].siReiniciar;
   const btnCancelar = document.getElementById('btn-cancelar');
   if (btnCancelar) btnCancelar.textContent = traduccionesUI[idiomaActual].cancelar;
+  
+  // Actualizar botones de continuar
+  const closeBtn = document.getElementById('close-btn');
+  if (closeBtn) closeBtn.textContent = traduccionesUI[idiomaActual].continuar;
+  const resultContinueBtn = document.querySelector('#result-modal .modal-btn.confirm-btn');
+  if (resultContinueBtn) resultContinueBtn.textContent = traduccionesUI[idiomaActual].continuar;
 }
 
 // Función para mostrar modal de idioma
